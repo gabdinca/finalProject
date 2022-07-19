@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.BookDto;
 import ro.sda.javaro35.finalProject.entities.Book;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
-import ro.sda.javaro35.finalProject.repository.BookRepository;
+import ro.sda.javaro35.finalProject.repository.RecipeRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BookService {
 
-    private BookRepository bookRepository;
+    private RecipeRepository bookRepository;
     private BookMapper bookMapper;
 
     public List<BookDto> getAllBooks() {
