@@ -1,14 +1,18 @@
 package ro.sda.javaro35.finalProject.dto;
 
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Data
+@FieldDefaults(level = PRIVATE)
 public class UserDto {
-    private Long id;
-    private String userName;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Integer age;
+    Long id;
+    String userName;
+    String password;
+    String firstName;
+    String lastName;
+    String email;
+    Integer age;
 }

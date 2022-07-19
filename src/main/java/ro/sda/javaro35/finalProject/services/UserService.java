@@ -1,6 +1,7 @@
 package ro.sda.javaro35.finalProject.services;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.UserDto;
 import ro.sda.javaro35.finalProject.entities.User;
@@ -9,14 +10,22 @@ import ro.sda.javaro35.finalProject.repository.UserRepository;
 
 import java.util.List;
 
-@Service
-@AllArgsConstructor
-public class UserService {
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+import static java.util.stream.Collectors.toList;
+import static lombok.AccessLevel.PRIVATE;
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+@Service
+@RequiredArgsConstructor
+@FieldDefaults(level = PRIVATE, makeFinal = true)
+public class UserService {
+    UserRepository userRepository;
+    UserMapper userMapper;
+
+    //
+    public List<UserDto> findAll() {
+        return userRepository.findAll().stream()
+                .map(user -> userMapper.map (user, UserDto.class))
+                .collect(toList());
+
     }
 
     public void createUser(UserDto userDto) {
