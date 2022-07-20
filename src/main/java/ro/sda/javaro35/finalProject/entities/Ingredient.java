@@ -5,27 +5,22 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.AUTO;
 import static lombok.AccessLevel.PRIVATE;
 
-@Entity(name = "recipe")
+@Entity(name = "ingredient")
 @Data
 @FieldDefaults(level = PRIVATE)
 @NoArgsConstructor
-public class Recipe {
-
+public class Ingredient {
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue
     Long id;
-    String title;
-    String description;
-    String preparationInstructions;
+    String name;
     @ManyToMany(fetch = LAZY)
-    List<Ingredient> ingredients;
-    boolean approvedState;
+    List<Recipe> recipeList;
+
 
 }

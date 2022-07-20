@@ -7,10 +7,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 @Data
 @FieldDefaults(level = PRIVATE)
-public class RecipeDto {
+public class IngredientDto {
     Long id;
-    String title;
-    boolean approvedState;
-    String description;
-    String preparationInstructions;
+    String name;
 }
