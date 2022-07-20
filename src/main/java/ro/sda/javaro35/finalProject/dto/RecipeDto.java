@@ -10,7 +10,7 @@ import static lombok.AccessLevel.PRIVATE;
 public class RecipeDto {
     Long id;
     String recipeName;
-    String approvedState;
+    boolean approvedState;
     String ingredient1;
     String ingredient2;
     String ingredient3;

@@ -6,11 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ro.sda.javaro35.finalProject.dto.UserDto;
-import ro.sda.javaro35.finalProject.entities.User;
 import ro.sda.javaro35.finalProject.services.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static ro.sda.javaro35.finalProject.controller.UserController.BASE_URL;
@@ -21,13 +19,6 @@ import static ro.sda.javaro35.finalProject.controller.UserController.BASE_URL;
 public class UserController {
     static final String BASE_URL = "/users";
     private final UserService userService;
-
-    @GetMapping
-    public String findAllUsers(final Model model) {
-        List<User> userList = userService.findAll();
-        model.addAttribute("users", userList);
-        return "users";
-    }
 
     @GetMapping("/create")
     public String userAdd(final Model model) {

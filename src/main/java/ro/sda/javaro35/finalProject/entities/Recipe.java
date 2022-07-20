@@ -6,13 +6,12 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import static javax.persistence.GenerationType.AUTO;
 import static lombok.AccessLevel.PRIVATE;
 
-@Entity
+@Entity(name = "recipe")
 @Data
 @FieldDefaults(level = PRIVATE)
 @NoArgsConstructor
@@ -22,7 +21,7 @@ public class Recipe {
     @GeneratedValue(strategy = AUTO)
     Long id;
     String recipeName;
-    String approvedState;
+    boolean approvedState;
     String ingredient1;
     String ingredient2;
     String ingredient3;
