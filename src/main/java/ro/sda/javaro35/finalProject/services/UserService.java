@@ -1,6 +1,6 @@
 package ro.sda.javaro35.finalProject.services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.UserDto;
@@ -11,7 +11,7 @@ import ro.sda.javaro35.finalProject.repository.UserRepository;
 import static lombok.AccessLevel.PRIVATE;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class UserService {
     UserRepository userRepository;

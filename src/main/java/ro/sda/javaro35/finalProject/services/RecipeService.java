@@ -18,6 +18,7 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class RecipeService {
+
     RecipeRepository recipeRepository;
     RecipeValidator recipeValidator;
     RecipeMapper recipeMapper;
@@ -28,7 +29,7 @@ public class RecipeService {
                 .collect(toList());
     }
 
-    public RecipeDto getById(final long id) {
+    public RecipeDto getRecipeById(final long id) {
         Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundError(id + "was not found"));
         return recipeMapper.convertToDto(recipe);  // return recipeMapper.map(recipe,RecipeDto.class)
@@ -41,12 +42,29 @@ public class RecipeService {
     }
 
     public void updateRecipe(final Recipe recipe, final long id) {
-        recipeValidator.validateRecipeCanBeUpdated(id);
+        recipeValidator.validateRecipeCanBeUpdateOrDeleted(id);
         recipeRepository.save(recipe);
     }
 
-    public void deleteById(final long id) {
-        recipeValidator.validateRecipeCanBeUpdated(id);
+    public void deleteRecipe(final long id) {
+        recipeValidator.validateRecipeCanBeUpdateOrDeleted(id);
         recipeRepository.deleteById(id);
     }
+
+    public Boolean aproveRecipe() {
+        //TODO
+        return true;
+    }
+
+    public Boolean declineRecipe() {
+        //TODO
+        return true;
+    }
+//    public List<RecipeDto> getRecipeWithoutOneIngredient() {
+//        //3 {
+////        all3 +
+////        1 si 2
+////            1 si 3
+////            2 si 3
+//    }
 }
