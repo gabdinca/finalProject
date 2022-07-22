@@ -1,0 +1,20 @@
+Functionalities:
+
+1. Login and Sign up.
+-Sign up form only for users with: user, password, firstname, lastname, email, age.
+-Confirming email address.
+-Create user in DB.
+
+2. Search recipes.
+- Return recipes with exact number of ingredients.
+- Return recipes without one ingredient.
+- Return recipes contains main ingredient.
+
+3. Add recipes.
+- Add recipes by users
+
+4. Approve by admin.
+
+
+
+

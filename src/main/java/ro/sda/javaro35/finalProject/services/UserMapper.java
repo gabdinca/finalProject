@@ -21,7 +21,6 @@ public class UserMapper implements Mapper<User, UserDto> {
         userDto.setLastName(entity.getLastName());
         userDto.setAge(entity.getAge());
         userDto.setEmail(entity.getEmail());
-        userDto.setUserName(entity.getUserName());
         userDto.setPassword(entity.getPassword());
         return userDto;
     }
@@ -39,7 +38,6 @@ public class UserMapper implements Mapper<User, UserDto> {
         user.setLastName(userDto.getLastName());
         user.setAge(userDto.getAge());
         user.setEmail(userDto.getEmail());
-        user.setUserName(userDto.getUserName());
         user.setPassword(userDto.getPassword());
         return user;
     }
