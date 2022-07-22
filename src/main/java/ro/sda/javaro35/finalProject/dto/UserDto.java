@@ -9,7 +9,6 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE)
 public class UserDto {
     Long id;
-    String userName;
     String password;
     String firstName;
     String lastName;
