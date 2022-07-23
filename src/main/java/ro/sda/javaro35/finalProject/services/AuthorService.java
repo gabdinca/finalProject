@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.AuthorDto;
 import ro.sda.javaro35.finalProject.entities.Author;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.AuthorMapper;
 import ro.sda.javaro35.finalProject.repository.AuthorRepository;
 
 import java.util.List;

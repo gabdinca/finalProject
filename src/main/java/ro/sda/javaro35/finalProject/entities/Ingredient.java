@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.AUTO;
 import static lombok.AccessLevel.PRIVATE;
 
 @Entity(name = "ingredient")
@@ -16,11 +17,10 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor
 public class Ingredient {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = AUTO)
     Long id;
+    @Column(nullable = false)
     String name;
     @ManyToMany(fetch = LAZY)
     List<Recipe> recipeList;
-
-
 }

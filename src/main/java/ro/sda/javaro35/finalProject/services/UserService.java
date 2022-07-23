@@ -1,6 +1,6 @@
 package ro.sda.javaro35.finalProject.services;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +11,7 @@ import ro.sda.javaro35.finalProject.dto.UserDto;
 import ro.sda.javaro35.finalProject.entities.ConfirmationToken;
 import ro.sda.javaro35.finalProject.entities.User;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.UserMapper;
 import ro.sda.javaro35.finalProject.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,7 @@ import java.util.UUID;
 import static lombok.AccessLevel.PRIVATE;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class UserService implements UserDetailsService {
     static String USER_NOT_FOUND_MSG = "user with email %s not found";

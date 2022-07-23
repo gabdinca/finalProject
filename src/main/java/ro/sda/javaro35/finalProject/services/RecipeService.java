@@ -2,10 +2,14 @@ package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
+import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.RecipeMapper;
+import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.repository.RecipeRepository;
 import ro.sda.javaro35.finalProject.validators.RecipeValidator;
 
@@ -18,6 +22,7 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class RecipeService {
+    IngredientRepository ingredientRepository;
     RecipeRepository recipeRepository;
     RecipeValidator recipeValidator;
     RecipeMapper recipeMapper;
@@ -28,7 +33,7 @@ public class RecipeService {
                 .collect(toList());
     }
 
-    public RecipeDto getById(final long id) {
+    public RecipeDto getRecipeById(final long id) {
         Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundError(id + "was not found"));
         return recipeMapper.convertToDto(recipe);  // return recipeMapper.map(recipe,RecipeDto.class)
@@ -41,12 +46,40 @@ public class RecipeService {
     }
 
     public void updateRecipe(final Recipe recipe, final long id) {
-        recipeValidator.validateRecipeCanBeUpdated(id);
+        recipeValidator.validateRecipeCanBeUpdateOrDeleted(id);
         recipeRepository.save(recipe);
     }
 
-    public void deleteById(final long id) {
-        recipeValidator.validateRecipeCanBeUpdated(id);
+    public void deleteRecipe(final long id) {
+        recipeValidator.validateRecipeCanBeUpdateOrDeleted(id);
         recipeRepository.deleteById(id);
     }
+
+    public Boolean aproveRecipe() {
+        //TODO
+        return true;
+    }
+
+    public Boolean declineRecipe() {
+        //TODO
+        return true;
+    }
+
+    public String createRecipe(RecipeDto recipeDto) {
+        List<Ingredient> ingredients = recipeDto.getIngredients();
+        Recipe recipe = recipeMapper.convertToEntity(recipeDto);
+        recipeRepository.save(recipe);
+        //TODO
+        for (Ingredient ingredient : ingredients) {
+            ingredientRepository.save(ingredient);
+        }
+        return "recipe save";
+    }
+//    public List<RecipeDto> getRecipeWithoutOneIngredient() {
+//        //3 {
+////        all3 +
+////        1 si 2
+////            1 si 3
+////            2 si 3
+//    }
 }

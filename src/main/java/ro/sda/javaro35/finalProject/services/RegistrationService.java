@@ -1,26 +1,30 @@
 package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.sda.javaro35.finalProject.entities.ConfirmationToken;
 import ro.sda.javaro35.finalProject.entities.User;
 import ro.sda.javaro35.finalProject.enums.UserRole;
 import ro.sda.javaro35.finalProject.registration.EmailValidator;
-import ro.sda.javaro35.finalProject.registration.RegistrationRequest;
+import ro.sda.javaro35.finalProject.registration.RegistrationRequestDto;
 import ro.sda.javaro35.finalProject.repository.EmailSender;
 
 import java.time.LocalDateTime;
 
+import static lombok.AccessLevel.PRIVATE;
+
 @Service
 @AllArgsConstructor
+@FieldDefaults(makeFinal = true, level = PRIVATE)
 public class RegistrationService {
-    private final UserService userService;
-    private final EmailValidator emailValidator;
-    private final ConfirmationTokenService confirmationTokenService;
-    private final EmailSender emailSender;
+    UserService userService;
+    EmailValidator emailValidator;
+    ConfirmationTokenService confirmationTokenService;
+    EmailSender emailSender;
 
-    public String register(RegistrationRequest request) {
+    public String register(RegistrationRequestDto request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
             throw new IllegalStateException("email no valid");
