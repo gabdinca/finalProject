@@ -10,8 +10,7 @@ import java.util.List;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findAll();
 
-    Boolean aproveRecipe();
-
-    Boolean declineRecipe();
+//    Boolean aproveRecipe();
+//    Boolean declineRecipe();
 //    List<Recipe> findRecipeWithoutOneIngredient();
 }

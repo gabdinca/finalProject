@@ -11,6 +11,7 @@ import ro.sda.javaro35.finalProject.dto.UserDto;
 import ro.sda.javaro35.finalProject.entities.ConfirmationToken;
 import ro.sda.javaro35.finalProject.entities.User;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.UserMapper;
 import ro.sda.javaro35.finalProject.repository.UserRepository;
 
 import java.time.LocalDateTime;

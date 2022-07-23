@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
 import ro.sda.javaro35.finalProject.repository.RecipeRepository;
-import ro.sda.javaro35.finalProject.services.RecipeMapper;
+import ro.sda.javaro35.finalProject.mapper.RecipeMapper;
 import ro.sda.javaro35.finalProject.services.RecipeService;
 import ro.sda.javaro35.finalProject.validators.RecipeValidator;
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.BookDto;
 import ro.sda.javaro35.finalProject.entities.Book;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.BookMapper;
 import ro.sda.javaro35.finalProject.repository.BookRepository;
 
 import java.util.List;

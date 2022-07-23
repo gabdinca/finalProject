@@ -2,10 +2,14 @@ package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
+import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.RecipeMapper;
+import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.repository.RecipeRepository;
 import ro.sda.javaro35.finalProject.validators.RecipeValidator;
 
@@ -18,7 +22,7 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class RecipeService {
-
+    IngredientRepository ingredientRepository;
     RecipeRepository recipeRepository;
     RecipeValidator recipeValidator;
     RecipeMapper recipeMapper;
@@ -59,6 +63,17 @@ public class RecipeService {
     public Boolean declineRecipe() {
         //TODO
         return true;
+    }
+
+    public String createRecipe(RecipeDto recipeDto) {
+        List<Ingredient> ingredients = recipeDto.getIngredients();
+        Recipe recipe = recipeMapper.convertToEntity(recipeDto);
+        recipeRepository.save(recipe);
+        //TODO
+        for (Ingredient ingredient : ingredients) {
+            ingredientRepository.save(ingredient);
+        }
+        return "recipe save";
     }
 //    public List<RecipeDto> getRecipeWithoutOneIngredient() {
 //        //3 {

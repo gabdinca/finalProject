@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.IngredientDto;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.IngredientMapper;
 import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.validators.IngredientValidator;
 

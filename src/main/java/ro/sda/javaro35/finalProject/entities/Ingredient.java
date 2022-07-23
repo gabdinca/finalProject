@@ -23,6 +23,4 @@ public class Ingredient {
     String name;
     @ManyToMany(fetch = LAZY)
     List<Recipe> recipeList;
-
-
 }

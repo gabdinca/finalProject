@@ -33,5 +33,4 @@ public class Recipe {
     List<Ingredient> ingredients;
     @Enumerated(STRING)
     RecipeStatus recipeStatus;
-
 }
