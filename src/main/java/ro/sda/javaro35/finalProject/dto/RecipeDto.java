@@ -16,5 +16,5 @@ public class RecipeDto {
     String title;
     String description;
     String preparationInstructions;
-    List<IngredientDto> ingredientsIds;
+    List<Ingredient> ingredients;
 }
