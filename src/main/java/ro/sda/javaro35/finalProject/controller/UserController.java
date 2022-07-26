@@ -42,12 +42,12 @@ public class UserController {
     public String updateUser(@PathVariable("userId") final long id, final Model model) {
         UserDto userDto = userService.findById(id);
         model.addAttribute("userDto", userDto);
-        return "user_create";
+        return "user_update";
     }
 
     @DeleteMapping("/delete/{userId}")
     @ResponseStatus(NO_CONTENT)
-    public String deleteUser(@PathVariable("userId") final long id, final Model model) {
+    public String deleteUser(@PathVariable("userId") final long id) {
         userService.deleteById(id);
         return "redirect:" + BASE_URL;
     }

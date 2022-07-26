@@ -3,10 +3,12 @@ package ro.sda.javaro35.finalProject.services;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import ro.sda.javaro35.finalProject.dto.IngredientDto;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.IngredientMapper;
 import ro.sda.javaro35.finalProject.mapper.RecipeMapper;
 import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.repository.RecipeRepository;
@@ -24,6 +26,7 @@ public class RecipeService {
     IngredientRepository ingredientRepository;
     RecipeRepository recipeRepository;
     RecipeValidator recipeValidator;
+    IngredientMapper ingredientMapper;
     RecipeMapper recipeMapper;
 
     public List<RecipeDto> getAllRecipe() {
@@ -55,11 +58,10 @@ public class RecipeService {
     }
 
     public String createRecipe(RecipeDto recipeDto) {
-        List<Ingredient> ingredients = recipeDto.getIngredients();
+        List<IngredientDto> ingredients = recipeDto.getIngredients();
         Recipe recipe = recipeMapper.convertToEntity(recipeDto);
+
         recipeRepository.save(recipe);
-        //TODO
-        ingredientRepository.saveAll(ingredients);
         return "recipe save";
     }
 //    public List<RecipeDto> getRecipeWithoutOneIngredient() {
