@@ -1,6 +1,7 @@
 package ro.sda.javaro35.finalProject.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +19,7 @@ import static ro.sda.javaro35.finalProject.controller.UserController.BASE_URL;
 @RequestMapping(BASE_URL)
 public class UserController {
     static final String BASE_URL = "/users";
+    @Autowired
     private final UserService userService;
 
     @GetMapping("/create")

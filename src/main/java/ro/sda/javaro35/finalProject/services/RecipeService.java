@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
@@ -66,13 +65,14 @@ public class RecipeService {
         return true;
     }
 
-    @Transactional
-    public String createRecipe(RecipeDto recipe) {
-        Recipe entity= recipeMapper.convertToEntity(recipe);
-
-
-        recipeRepository.save(entity);
-
+    public String createRecipe(RecipeDto recipeDto) {
+        List<Ingredient> ingredients = recipeDto.getIngredients();
+        Recipe recipe = recipeMapper.convertToEntity(recipeDto);
+        recipeRepository.save(recipe);
+        //TODO
+        for (Ingredient ingredient : ingredients) {
+            ingredientRepository.save(ingredient);
+        }
         return "recipe save";
     }
 //    public List<RecipeDto> getRecipeWithoutOneIngredient() {
