@@ -2,13 +2,13 @@ package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import ro.sda.javaro35.finalProject.dto.IngredientDto;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
 import ro.sda.javaro35.finalProject.exceptions.EntityNotFoundError;
+import ro.sda.javaro35.finalProject.mapper.IngredientMapper;
 import ro.sda.javaro35.finalProject.mapper.RecipeMapper;
 import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.repository.RecipeRepository;
@@ -26,6 +26,7 @@ public class RecipeService {
     IngredientRepository ingredientRepository;
     RecipeRepository recipeRepository;
     RecipeValidator recipeValidator;
+    IngredientMapper ingredientMapper;
     RecipeMapper recipeMapper;
 
     public List<RecipeDto> getAllRecipe() {
@@ -56,23 +57,11 @@ public class RecipeService {
         recipeRepository.deleteById(id);
     }
 
-    public Boolean aproveRecipe() {
-        //TODO
-        return true;
-    }
+    public String createRecipe(RecipeDto recipeDto) {
+        List<IngredientDto> ingredients = recipeDto.getIngredients();
+        Recipe recipe = recipeMapper.convertToEntity(recipeDto);
 
-    public Boolean declineRecipe() {
-        //TODO
-        return true;
-    }
-
-    @Transactional
-    public String createRecipe(RecipeDto recipe) {
-        Recipe entity= recipeMapper.convertToEntity(recipe);
-
-
-        recipeRepository.save(entity);
-
+        recipeRepository.save(recipe);
         return "recipe save";
     }
 //    public List<RecipeDto> getRecipeWithoutOneIngredient() {

@@ -1,6 +1,7 @@
 package ro.sda.javaro35.finalProject.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +19,7 @@ import static ro.sda.javaro35.finalProject.controller.UserController.BASE_URL;
 @RequestMapping(BASE_URL)
 public class UserController {
     static final String BASE_URL = "/users";
+    @Autowired
     private final UserService userService;
 
     @GetMapping("/create")
@@ -40,12 +42,12 @@ public class UserController {
     public String updateUser(@PathVariable("userId") final long id, final Model model) {
         UserDto userDto = userService.findById(id);
         model.addAttribute("userDto", userDto);
-        return "user_create";
+        return "user_update";
     }
 
     @DeleteMapping("/delete/{userId}")
     @ResponseStatus(NO_CONTENT)
-    public String deleteUser(@PathVariable("userId") final long id, final Model model) {
+    public String deleteUser(@PathVariable("userId") final long id) {
         userService.deleteById(id);
         return "redirect:" + BASE_URL;
     }

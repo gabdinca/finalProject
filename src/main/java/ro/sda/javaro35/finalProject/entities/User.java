@@ -24,11 +24,15 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = AUTO)
     Long id;
-
+    @Column(nullable = false)
     String firstname;
+    @Column(nullable = false)
     String lastname;
+    @Column(nullable = false)
     String email;
+    @Column(nullable = false)
     String password;
+    @Column(nullable = false)
     Integer age;
     @Enumerated(EnumType.STRING)
     UserRole userRole;
@@ -53,7 +57,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
