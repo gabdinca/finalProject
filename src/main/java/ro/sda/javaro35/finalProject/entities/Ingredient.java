@@ -21,6 +21,6 @@ public class Ingredient {
     Long id;
     @Column(nullable = false)
     String name;
-    @ManyToMany(fetch = LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE)
     List<Recipe> recipeList;
 }

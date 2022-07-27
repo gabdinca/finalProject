@@ -2,7 +2,6 @@ package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
@@ -55,24 +54,12 @@ public class RecipeService {
         recipeRepository.deleteById(id);
     }
 
-    public Boolean aproveRecipe() {
-        //TODO
-        return true;
-    }
-
-    public Boolean declineRecipe() {
-        //TODO
-        return true;
-    }
-
     public String createRecipe(RecipeDto recipeDto) {
         List<Ingredient> ingredients = recipeDto.getIngredients();
         Recipe recipe = recipeMapper.convertToEntity(recipeDto);
         recipeRepository.save(recipe);
         //TODO
-        for (Ingredient ingredient : ingredients) {
-            ingredientRepository.save(ingredient);
-        }
+        ingredientRepository.saveAll(ingredients);
         return "recipe save";
     }
 //    public List<RecipeDto> getRecipeWithoutOneIngredient() {

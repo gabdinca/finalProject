@@ -29,7 +29,7 @@ public class Recipe {
     String description;
     @Column(nullable = false)
     String preparationInstructions;
-    @ManyToMany(fetch = LAZY)
+    @ManyToMany(mappedBy = "recipeList", cascade = CascadeType.PERSIST)
     List<Ingredient> ingredients;
     @Enumerated(STRING)
     RecipeStatus recipeStatus;
