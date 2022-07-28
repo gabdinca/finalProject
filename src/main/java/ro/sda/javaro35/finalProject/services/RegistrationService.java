@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ro.sda.javaro35.finalProject.dto.UserDto;
 import ro.sda.javaro35.finalProject.entities.ConfirmationToken;
 import ro.sda.javaro35.finalProject.entities.User;
 import ro.sda.javaro35.finalProject.enums.UserRole;
+import ro.sda.javaro35.finalProject.mapper.UserMapper;
 import ro.sda.javaro35.finalProject.registration.EmailValidator;
-import ro.sda.javaro35.finalProject.registration.RegistrationRequestDto;
 import ro.sda.javaro35.finalProject.repository.EmailSender;
 
 import java.time.LocalDateTime;
@@ -20,27 +21,24 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(makeFinal = true, level = PRIVATE)
 public class RegistrationService {
     UserService userService;
+    UserMapper userMapper;
     EmailValidator emailValidator;
     ConfirmationTokenService confirmationTokenService;
     EmailSender emailSender;
 
-    public String register(RegistrationRequestDto request) {
+    public String register(UserDto request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
             throw new IllegalStateException("email no valid");
         }
-        String token = userService.signUpUser(new User(request.getFirstName(),
-                request.getLastName(),
-                request.getEmail(),
-                request.getPassword(),
-                request.getAge(),
-                UserRole.USER));
+        User user = userMapper.convertToEntity(request);
+        user.setUserRole(UserRole.USER);
+        String token = userService.signUpUser(user);
         String link = "http://localhost:8080/user/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
 
         return token;
     }
-
 
     @Transactional
     public String confirmToken(String token) {

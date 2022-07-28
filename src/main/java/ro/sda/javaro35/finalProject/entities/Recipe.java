@@ -9,6 +9,8 @@ import javax.persistence.*;
 
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.AUTO;
@@ -29,7 +31,7 @@ public class Recipe {
     String description;
     @Column(nullable = false)
     String preparationInstructions;
-    @ManyToMany(mappedBy = "recipeList", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "recipeList", cascade = PERSIST)
     List<Ingredient> ingredients;
     @Enumerated(STRING)
     RecipeStatus recipeStatus;

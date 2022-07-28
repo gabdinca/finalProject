@@ -2,6 +2,7 @@ package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.IngredientDto;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
@@ -24,9 +25,12 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class RecipeService {
     IngredientRepository ingredientRepository;
+    @Autowired
     RecipeRepository recipeRepository;
+    @Autowired
     RecipeValidator recipeValidator;
     IngredientMapper ingredientMapper;
+    @Autowired
     RecipeMapper recipeMapper;
 
     public List<RecipeDto> getAllRecipe() {
@@ -60,7 +64,6 @@ public class RecipeService {
     public String createRecipe(RecipeDto recipeDto) {
         List<IngredientDto> ingredients = recipeDto.getIngredients();
         Recipe recipe = recipeMapper.convertToEntity(recipeDto);
-
         recipeRepository.save(recipe);
         return "recipe save";
     }

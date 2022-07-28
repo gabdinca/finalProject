@@ -1,24 +1,28 @@
 package ro.sda.javaro35.finalProject.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ro.sda.javaro35.finalProject.dto.UserDto;
 import ro.sda.javaro35.finalProject.registration.RegistrationRequestDto;
 import ro.sda.javaro35.finalProject.services.RegistrationService;
 
-@RestController
+@Controller
 @RequestMapping(path = "/user/registration")
 @AllArgsConstructor
 public class RegistrationController {
-
     private final RegistrationService registrationService;
 
-    @PostMapping
-    public String register(@RequestBody RegistrationRequestDto request){
-        return registrationService.register(request);
+    @PostMapping()
+    public String register( UserDto request){
+         registrationService.register(request);
+         return "homepage";
     }
     @GetMapping
-    public String register() {
+    public String register(Model model) {
        //TODO
+        model.addAttribute("request", new UserDto());
         return "register";
     }
 
