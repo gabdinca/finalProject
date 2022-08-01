@@ -14,7 +14,7 @@ import ro.sda.javaro35.finalProject.services.RegistrationService;
 public class RegistrationController {
     private final RegistrationService registrationService;
 
-    @PostMapping()
+    @PostMapping
     public String register( UserDto request){
          registrationService.register(request);
          return "homepage";

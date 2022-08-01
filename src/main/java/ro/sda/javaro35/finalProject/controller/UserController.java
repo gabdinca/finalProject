@@ -28,6 +28,7 @@ public class UserController {
         return "user_add";
     }
 
+
     @PostMapping("/create")
     public String createUser(@ModelAttribute("userCreate") @Valid final UserDto userDto, final Errors errors, final Model model) {
         if (errors.hasErrors()) {
