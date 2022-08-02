@@ -3,9 +3,9 @@
 <head>
     <meta charset="uf-8">
     <title>Navbar</title>
-    <link rel="stylesheet" href="../../static/nav_bar_2.css">
     <link href="http://fonts.googleapis.com/css?
     family = Alfa+Slab+One|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" th:href = "@{/nav_bar_2.css}">
 </head>
 <body>
 <div th:replace = "fragments/header::header">&nbsp;
@@ -14,7 +14,7 @@
     <h1><a th:href="@{/}">RECIPES</span></a></h1>
     <nav>
         <ul>
-            <li><a th:href="@{/recipe}">Recipes</a></li>
+            <li><a th:href="@{/recipe}">Recipes 2</a></li>
             <li><a th:href="@{/ingredient}">Ingredients</a></li>
             <li><a th:href="@{/logout}">Logout</a></li>
         </ul>

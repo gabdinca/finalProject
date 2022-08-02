@@ -11,10 +11,28 @@
             integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" th:href = "@{/nav_bar_2.css}">
     <title>Home</title>
 </head>
 <body>
 <header th:replace="fragments/nav_bar_2 :: navBar"/>
+<section class = "vh-100" style="background-color: #d7d7b3">
+    <div class = "chosen-container chosen-container-multi" style="width: 100%;" title>
+        <ul class = "chosen-choices">
+            <li class = "search-field">
+                <input type = "text" value = "Click to select ingredients for search..." class
+                       ="default" autocomplete="off" style="width: 348px;">
+            </li>
+        </ul>
+    </div>
+    <div class = "ingredient-search-btn-w">
+        <span class = "ingredient-loading-icon-w">
+            <img alt data-src ="https://www.retetedupaingrediente.ro/wp-content/themes/neptune-by-osetin/assets/img/ajax-loader.gif">
+            <noscript>
+                <img src ="https://www.retetedupaingrediente.ro/wp-content/themes/neptune-by-osetin/assets/img/ajax-loader.gif" alt="">
+            </noscript>
+        </span>
+    </div>
+</section>
 </body>
 </html>
