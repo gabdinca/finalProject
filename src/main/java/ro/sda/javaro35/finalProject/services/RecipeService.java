@@ -33,6 +33,18 @@ public class RecipeService {
     @Autowired
     RecipeMapper recipeMapper;
 
+
+
+    public List<RecipeDto> findByIngredients(List<IngredientDto> ingredientDtoList){
+        List<Ingredient> ingredients = ingredientDtoList.stream()
+                .map(ingredientMapper::convertToEntity)
+                .collect(toList());
+
+        return recipeRepository.findByListOfIngredients(ingredients).stream()
+                .map(recipeMapper::convertToDto)
+                .collect(toList());
+    }
+
     public List<RecipeDto> getAllRecipe() {
         return recipeRepository.findAll().stream()
                 .map(recipeMapper::convertToDto)
@@ -67,6 +79,7 @@ public class RecipeService {
         recipeRepository.save(recipe);
         return "recipe save";
     }
+
 //    public List<RecipeDto> getRecipeWithoutOneIngredient() {
 //        //3 {
 ////        all3 +

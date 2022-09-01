@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="ISO-8859-1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,23 +18,40 @@
 </head>
 <body>
 <header th:replace="fragments/nav_bar_2 :: navBar"/>
-<section class = "vh-100" style="background-color: #d7d7b3">
-    <div class = "chosen-container chosen-container-multi" style="width: 100%;" title>
-        <ul class = "chosen-choices">
-            <li class = "search-field">
-                <input type = "text" value = "Click to select ingredients for search..." class
-                       ="default" autocomplete="off" style="width: 348px;">
-            </li>
-        </ul>
+
+<div sec:authorize="isAuthenticated()">
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/addRecipe}" class="btn btn-primary">Add a new recipe</a>
+    <a th:href="@{/findAllRecipes}" class="btn btn-primary">All recipes</a>
+    <a th:href="@{/findRecipe}" class="btn btn-primary">Recipe search</a>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <form method="POST" th:action="@{/logout}">You are logged in as: <span sec:authentication="name">User with role:</span> <span sec:authentication="principal.authorities">.</span>
+        <input type="submit" value="Logout" class="btn btn-danger" />
+    </form>
+</div>
+
+<div><h3>Recipe Search by ingredients</h3></div>
+<form th:action="/recipe" th:object="${ingredientList}" method="post" >
+    <div>
+        <label for="ingredients">Ingredients: </label>
+        <input type="text" name="lectureSearch" th:value="${findByIngrediens}">
+        <input type="submit" value="Search">
     </div>
-    <div class = "ingredient-search-btn-w">
-        <span class = "ingredient-loading-icon-w">
-            <img alt data-src ="https://www.retetedupaingrediente.ro/wp-content/themes/neptune-by-osetin/assets/img/ajax-loader.gif">
-            <noscript>
-                <img src ="https://www.retetedupaingrediente.ro/wp-content/themes/neptune-by-osetin/assets/img/ajax-loader.gif" alt="">
-            </noscript>
-        </span>
-    </div>
-</section>
+</form>
+
+<table>
+
+    <tr th:each="recipe : ${recipeList}">
+        <td><span th:text="${lecture.subject}" >LECTURE.SUBJECT</span></td>
+        <td><span th:text="${lecture.shortDescription}" >LECTURE.SHORTDESCRIPTION</span></td>
+        <td><span th:text="${lecture.lectureType}" >LECTURE.LECTURETYPE</span></td>
+        <td><span th:text="${lecture.lecturer.name}" >LECTURER.NAME</span></td>
+        <td><span th:text="${lecture.lecturer.lecturerPosition}" >LECTURER.LECTURERPOSITION</span></td>
+        <td><span th:text="${lecture.published}" >LECTURE.PUBLISHED</span></td>
+    </tr>
+
+</table>
+
 </body>
 </html>

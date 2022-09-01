@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ro.sda.javaro35.finalProject.dto.IngredientDto;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
+import ro.sda.javaro35.finalProject.entities.Ingredient;
+import ro.sda.javaro35.finalProject.entities.Recipe;
 import ro.sda.javaro35.finalProject.services.RecipeService;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(path = "/recipe")
 @AllArgsConstructor
 public class RecipeController {
@@ -25,9 +25,17 @@ public class RecipeController {
         return "allRecipe";
     }
 
+    @GetMapping(path = "/search")
+    @Transactional
+    public String searchRecipes(@ModelAttribute List<IngredientDto> ingredientDtoList){
+
+        List<RecipeDto> recipeDtos = recipeService.findByIngredients(ingredientDtoList);
+        return "recipelist";
+    }
+
     @Transactional
     @PostMapping
-    public String createRecipe(@ModelAttribute RecipeDto recipe) {
-        return recipeService.createRecipe(recipe);
+    public String createRecipe(@ModelAttribute RecipeDto recipeDto) {
+        return recipeService.createRecipe(recipeDto);
     }
 }
