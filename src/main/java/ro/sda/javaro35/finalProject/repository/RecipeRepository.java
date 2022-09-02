@@ -13,13 +13,5 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findAll();
-
-    @Transactional
-    @Modifying
-    @Query("select r from recipe r WHERE r.ingredients = ?1")
-    List<Recipe> findByListOfIngredients(List<Ingredient> ingredients);
-//    @Query(value = "SELECT recipe from recipe join ingredient i where i.id = :ingredientList")
-//    List<Recipe> findAllByIngredientsContaining(List<Ingredient> ingredientList);
-//    List<Recipe> findByDescriptionContainingIgnoreCase(String description);
-//    List<Recipe> findRecipeWithoutOneIngredient();
+    List<Recipe> findRecipesByIngredientsIn(List<Ingredient> ingredients);
 }

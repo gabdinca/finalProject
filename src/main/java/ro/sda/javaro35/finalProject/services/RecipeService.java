@@ -40,7 +40,7 @@ public class RecipeService {
                 .map(ingredientMapper::convertToEntity)
                 .collect(toList());
 
-        return recipeRepository.findByListOfIngredients(ingredients).stream()
+        return recipeRepository.findRecipesByIngredientsIn(ingredients).stream()
                 .map(recipeMapper::convertToDto)
                 .collect(toList());
     }

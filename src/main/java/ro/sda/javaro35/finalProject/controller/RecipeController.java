@@ -25,17 +25,16 @@ public class RecipeController {
         return "allRecipe";
     }
 
-    @GetMapping(path = "/search")
+    @PostMapping(path = "/search")
     @Transactional
-    public String searchRecipes(@ModelAttribute List<IngredientDto> ingredientDtoList){
-
+    public String searchRecipes(@RequestBody List<IngredientDto> ingredientDtoList){
         List<RecipeDto> recipeDtos = recipeService.findByIngredients(ingredientDtoList);
         return "recipelist";
     }
 
     @Transactional
     @PostMapping
-    public String createRecipe(@ModelAttribute RecipeDto recipeDto) {
+    public String createRecipe(@RequestBody RecipeDto recipeDto) {
         return recipeService.createRecipe(recipeDto);
     }
 }
