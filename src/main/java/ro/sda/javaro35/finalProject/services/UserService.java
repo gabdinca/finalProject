@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
 
 
         if (userExists) {
-            //TODO: check of atributes are the same
+            //TODO: check of attributes are the same
             //TODO: if email not confirmed send confirmation email
 
             throw new IllegalStateException("email already taken");

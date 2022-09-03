@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="ISO-8859-1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -11,11 +12,42 @@
             integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" th:href = "@{/nav_bar_2.css}">
-    <title>Home</title>
 </head>
 <body>
-<header th:replace="fragments/nav_bar_2 :: navBar"/>
-<p>You Acoount has been activated</p>
+<section class="vh-100" style="background-color:#437aa9" >
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://retete.unica.ro/wp-content/uploads/2015/12/FotorCreated.png" width="400" height="700"
+                                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <div>Your account has been activated. Please Log In.</div>
+                                <form th:action="@{/login}" method="post">
+                                    <div class="user-show-card">
+                                        <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
+                                    </div>
+                                    <div class="password-show-card">
+                                        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                                        <span><i class="fadeIn fas fa-eye password-show"
+                                                 aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="submit" class="fadeIn fourth" value="Log In">
+                                    <p class="mb-5 pb-lg-2" style="color: #393F81;">Don?t have an account? <a th:href="@{/user/registration}"
+                                                                                                              style="color:
+                                                                                                          #393F81;">Register here</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

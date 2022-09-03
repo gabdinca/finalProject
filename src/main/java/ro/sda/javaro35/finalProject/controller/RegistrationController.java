@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ro.sda.javaro35.finalProject.dto.UserDto;
-import ro.sda.javaro35.finalProject.registration.RegistrationRequestDto;
 import ro.sda.javaro35.finalProject.services.RegistrationService;
 
 @Controller

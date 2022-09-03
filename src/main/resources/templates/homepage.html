@@ -17,6 +17,7 @@
     <title>Home</title>
 </head>
 <body>
+
 <header th:replace="fragments/nav_bar_2 :: navBar"/>
 
 <div sec:authorize="isAuthenticated()">
@@ -38,8 +39,8 @@
         <p><strong>Select Ingredients(Multiple):</strong>
             <select id="multiple-hobbies" th:field="*{ingredientsListIds}" multiple="multiple">
 
-                <option th:each="igredient: ${ingredients}"
-                        th:value="${igredient.id}" th:text="${igredient.name}">
+                <option th:each="ingredient: ${ingredients}"
+                        th:value="${ingredient.id}" th:text="${ingredient.name}">
             </select>
         </p>
         <input type="submit" value="submit"/>
