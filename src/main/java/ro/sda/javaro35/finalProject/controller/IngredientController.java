@@ -19,10 +19,9 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
     @GetMapping(path = "ingredients")
-    public String getAllIngredient(final Model model) {
-        List<IngredientDto> ingredients = ingredientService.getAllIngredient();
-        model.addAttribute("ingredients", ingredients);
-        return "listOfIngredient";
+    public String getAllIngredients(@ModelAttribute final Model model) {
+        model.addAttribute("ingredients", ingredientService.getAllIngredient());
+        return "igredientsFromDb";
     }
 
     @PutMapping(path = "/update/{ingredientId}")

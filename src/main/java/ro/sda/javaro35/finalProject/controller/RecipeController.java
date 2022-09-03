@@ -7,17 +7,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ro.sda.javaro35.finalProject.dto.IngredientDto;
 import ro.sda.javaro35.finalProject.dto.RecipeDto;
+import ro.sda.javaro35.finalProject.dto.SearchFormDto;
 import ro.sda.javaro35.finalProject.entities.Ingredient;
 import ro.sda.javaro35.finalProject.entities.Recipe;
+import ro.sda.javaro35.finalProject.services.IngredientService;
 import ro.sda.javaro35.finalProject.services.RecipeService;
 
+import javax.naming.directory.SearchControls;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "/recipe")
 @AllArgsConstructor
 public class RecipeController {
     private final RecipeService recipeService;
+    private final IngredientService ingredientService;
 
     @GetMapping()
     public String getRecipeById() {
@@ -27,9 +31,14 @@ public class RecipeController {
 
     @PostMapping(path = "/search")
     @Transactional
-    public String searchRecipes(@RequestBody List<IngredientDto> ingredientDtoList){
+    public String searchRecipes(@ModelAttribute SearchFormDto searchFormDto, Model model){
+        List<IngredientDto> ingredientDtoList = ingredientService.getAllIngredientsByIds(searchFormDto.getIngredientsListIds());
         List<RecipeDto> recipeDtos = recipeService.findByIngredients(ingredientDtoList);
-        return "recipelist";
+        model.addAttribute("searchResult", recipeDtos);
+        model.addAttribute("searchForm", new SearchFormDto());
+        model.addAttribute("ingredients", ingredientService.getAllIngredient());
+
+        return "homepage";
     }
 
     @Transactional

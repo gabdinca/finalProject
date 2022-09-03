@@ -29,6 +29,12 @@ public class IngredientService {
                 .collect(toList());
     }
 
+    public List<IngredientDto> getAllIngredientsByIds(List<Long> ingredientsIds) {
+        return ingredientRepository.findAllByIdIn(ingredientsIds).stream()
+                .map(ingredientMapper::convertToDto)
+                .collect(toList());
+    }
+
     public IngredientDto getByIngredientById(final long id) {
         Ingredient ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundError(id + "was not found"));

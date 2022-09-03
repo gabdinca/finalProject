@@ -32,23 +32,32 @@
 </div>
 
 <div><h3>Recipe Search by ingredients</h3></div>
-<form th:action="/recipe" th:object="${ingredientList}" method="post" >
-    <div>
-        <label for="ingredients">Ingredients: </label>
-        <input type="text" name="lectureSearch" th:value="${findByIngrediens}">
-        <input type="submit" value="Search">
+<form action="#" th:action="@{/recipe/search}"  th:object="${searchForm}" method="POST">
+    <div class="container">
+
+        <p><strong>Select Ingredients(Multiple):</strong>
+            <select id="multiple-hobbies" th:field="*{ingredientsListIds}" multiple="multiple">
+
+                <option th:each="igredient: ${ingredients}"
+                        th:value="${igredient.id}" th:text="${igredient.name}">
+            </select>
+        </p>
+        <input type="submit" value="submit"/>
     </div>
 </form>
 
 <table>
+    <tr th:each="searchResult : ${searchResult}">
+        <td><span th:text="${searchResult.title}" >Title</span></td>
+        <td><span th:text="${searchResult.description}" >Description</span></td>
+        <td><span th:text="${searchResult.preparationInstructions}" >Preparation instruction</span></td>
 
-    <tr th:each="recipe : ${recipeList}">
-        <td><span th:text="${lecture.subject}" >LECTURE.SUBJECT</span></td>
-        <td><span th:text="${lecture.shortDescription}" >LECTURE.SHORTDESCRIPTION</span></td>
-        <td><span th:text="${lecture.lectureType}" >LECTURE.LECTURETYPE</span></td>
-        <td><span th:text="${lecture.lecturer.name}" >LECTURER.NAME</span></td>
-        <td><span th:text="${lecture.lecturer.lecturerPosition}" >LECTURER.LECTURERPOSITION</span></td>
-        <td><span th:text="${lecture.published}" >LECTURE.PUBLISHED</span></td>
+        <td><ul th:each="ingredient: ${searchResult.ingredients}">
+                <li th:text="${ingredient.name}"></li>
+
+            </ul>
+
+             </td>
     </tr>
 
 </table>
