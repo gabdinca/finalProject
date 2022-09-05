@@ -15,6 +15,7 @@ import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.repository.RecipeRepository;
 import ro.sda.javaro35.finalProject.validators.RecipeValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -34,15 +35,22 @@ public class RecipeService {
     RecipeMapper recipeMapper;
 
 
-
-    public List<RecipeDto> findByIngredients(List<IngredientDto> ingredientDtoList){
+    public List<RecipeDto> findByIngredients(List<IngredientDto> ingredientDtoList) {
         List<Ingredient> ingredients = ingredientDtoList.stream()
                 .map(ingredientMapper::convertToEntity)
                 .collect(toList());
-
-        return recipeRepository.findRecipesByIngredientsIn(ingredients).stream()
+        List<RecipeDto> recipeDtoList = recipeRepository.findRecipesByIngredientsIn(ingredients)
+                .stream()
                 .map(recipeMapper::convertToDto)
+                .distinct()
                 .collect(toList());
+        List<RecipeDto> finalList = new ArrayList<>();
+        for (RecipeDto recipeDto : recipeDtoList) {
+            if (recipeDto.getIngredients().equals(ingredientDtoList)) {
+                finalList.add(recipeDto);
+            }
+        }
+        return finalList;
     }
 
     public List<RecipeDto> getAllRecipe() {
@@ -80,11 +88,16 @@ public class RecipeService {
         return "recipe save";
     }
 
-//    public List<RecipeDto> getRecipeWithoutOneIngredient() {
-//        //3 {
-////        all3 +
-////        1 si 2
-////            1 si 3
-////            2 si 3
-//    }
+    public List<RecipeDto> getRecipeWithoutOneIngredient(List<IngredientDto> ingredientDtoList) {
+        List<Ingredient> ingredients = ingredientDtoList.stream()
+                .map(ingredientMapper::convertToEntity)
+                .collect(toList());
+        List<RecipeDto> recipeDtoList = recipeRepository.findRecipesByIngredientsIn(ingredients)
+                .stream()
+                .map(recipeMapper::convertToDto)
+                .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
+                .distinct()
+                .collect(toList());
+        return recipeDtoList;
+    }
 }

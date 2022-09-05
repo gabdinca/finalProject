@@ -38,12 +38,17 @@ public class RecipeController {
         model.addAttribute("searchForm", new SearchFormDto());
         model.addAttribute("ingredients", ingredientService.getAllIngredient());
 
+        List<RecipeDto> recipeWithoutOneIngredient = recipeService.getRecipeWithoutOneIngredient(ingredientDtoList);
+        model.addAttribute("searchResultWithoutOneIngredient",recipeWithoutOneIngredient);
         return "homepage";
     }
+
+
 
     @Transactional
     @PostMapping
     public String createRecipe(@RequestBody RecipeDto recipeDto) {
         return recipeService.createRecipe(recipeDto);
     }
+
 }

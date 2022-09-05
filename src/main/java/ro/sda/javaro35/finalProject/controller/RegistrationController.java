@@ -14,21 +14,25 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public String register(UserDto request) {
-        registrationService.register(request);
-        return "homepage";
+    public String register( UserDto request){
+         registrationService.register(request);
+         return "homepage";
     }
-
     @GetMapping
     public String register(Model model) {
-        //TODO
+       //TODO
         model.addAttribute("request", new UserDto());
         return "register";
     }
 
     @GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
-
+    public String confirm(@RequestParam("token") String token, Model model){
+        try {
+            String result = registrationService.confirmToken(token);
+            model.addAttribute("result", result);
+        }catch (IllegalStateException e){
+            model.addAttribute("result", e.getMessage());
+        }
+        return "confirmation";
     }
 }
