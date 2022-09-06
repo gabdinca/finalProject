@@ -10,6 +10,7 @@ import ro.sda.javaro35.finalProject.mapper.IngredientMapper;
 import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.validators.IngredientValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -55,5 +56,14 @@ public class IngredientService {
     public void deleteIngredient(final long id) {
         ingredientValidator.validateIngredientCanBeUpdateOrDeleted(id);
         ingredientRepository.deleteById(id);
+    }
+
+    public String ingredientsToString(List<IngredientDto> ingredientList) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (IngredientDto ingredientDto : ingredientList) {
+            stringBuilder.append(ingredientDto.getName()).append("  ");
+        }
+        return stringBuilder.toString();
     }
 }

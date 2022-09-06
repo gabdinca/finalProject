@@ -92,12 +92,11 @@ public class RecipeService {
         List<Ingredient> ingredients = ingredientDtoList.stream()
                 .map(ingredientMapper::convertToEntity)
                 .collect(toList());
-        List<RecipeDto> recipeDtoList = recipeRepository.findRecipesByIngredientsIn(ingredients)
+        return recipeRepository.findRecipesByIngredientsIn(ingredients)
                 .stream()
                 .map(recipeMapper::convertToDto)
                 .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
                 .distinct()
                 .collect(toList());
-        return recipeDtoList;
     }
 }

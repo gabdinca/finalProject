@@ -31,18 +31,20 @@ public class RecipeController {
 
     @PostMapping(path = "/search")
     @Transactional
-    public String searchRecipes(@ModelAttribute SearchFormDto searchFormDto, Model model){
+    public String searchRecipes(@ModelAttribute SearchFormDto searchFormDto, Model model) {
         List<IngredientDto> ingredientDtoList = ingredientService.getAllIngredientsByIds(searchFormDto.getIngredientsListIds());
         List<RecipeDto> recipeDtos = recipeService.findByIngredients(ingredientDtoList);
         model.addAttribute("searchResult", recipeDtos);
         model.addAttribute("searchForm", new SearchFormDto());
         model.addAttribute("ingredients", ingredientService.getAllIngredient());
+        model.addAttribute("ingredientsString", ingredientService.ingredientsToString(ingredientDtoList));
 
         List<RecipeDto> recipeWithoutOneIngredient = recipeService.getRecipeWithoutOneIngredient(ingredientDtoList);
-        model.addAttribute("searchResultWithoutOneIngredient",recipeWithoutOneIngredient);
+        model.addAttribute("searchResultWithoutOneIngredient", recipeWithoutOneIngredient);
+//       List<IngredientDto> ingredientListWithoutOneIngredient = ingredientService.getAllIngredient(recipeWithoutOneIngredient);
+        model.addAttribute("ingredientsToString",ingredientService.ingredientsToString(ingredientDtoList));
         return "homepage";
     }
-
 
 
     @Transactional

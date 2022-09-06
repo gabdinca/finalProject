@@ -16,7 +16,7 @@ public class RegistrationController {
     @PostMapping
     public String register( UserDto request){
          registrationService.register(request);
-         return "homepage";
+         return "login_demo";
     }
     @GetMapping
     public String register(Model model) {
@@ -33,6 +33,6 @@ public class RegistrationController {
         }catch (IllegalStateException e){
             model.addAttribute("result", e.getMessage());
         }
-        return "confirmation";
+        return "confirmed";
     }
 }

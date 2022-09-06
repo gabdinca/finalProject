@@ -6,10 +6,11 @@ body, html {
 header {
     width: 100%;
     height: 70px;
-    background-color: #4d830f;
+    background-color: #66e848;
 }
 
 h1 {
+    color: #ffffff;
     position: absolute;
     padding: 3px;
     float: left;
@@ -18,8 +19,9 @@ h1 {
     font-family: 'Alfa Slab One', cursive;
 }
 
-span {
-    color: rgba(79, 14, 14, 0.21);
+h1 a:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 ul {
@@ -28,25 +30,48 @@ ul {
     margin-top: 8px;
 }
 
-li {
-    display: inline-block;
-    padding: 15px 30px;
-}
-
 a {
     text-align: center;
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.5vw;
 }
 
 a:hover {
-    color: #5a87d7;
+    color: #3f74d2;
     transition: 0.5s;
 }
 
 img {
     width: 100%;
     margin-top: -15%;
+}
+
+span {
+    padding: 10px 1px 10px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 18px;
+    font-family: 'Arial, sans-serif', serif;
+}
+
+li {
+    display: inline-block;
+    padding: 10px 15px 10px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Arial, sans-serif', serif;
+}
+
+li a {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px 10px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #ffffff;
 }

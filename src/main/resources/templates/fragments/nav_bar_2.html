@@ -1,23 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="uf-8">
     <title>Navbar</title>
     <link href="http://fonts.googleapis.com/css?
     family = Alfa+Slab+One|Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" th:href = "@{/nav_bar_2.css}">
+    <link rel="stylesheet" th:href="@{/nav_bar_2.css}">
 </head>
 <body>
-<div th:replace = "fragments/header::header">&nbsp;
+<div th:replace="fragments/header::header">&nbsp;
 </div>
 <header th:fragment="navBar">
     <h1><a th:href="@{/}">RECIPES</span></a></h1>
     <nav>
         <ul>
+            <!--            <li>-->
+            <!--                <div sec:authorize="isAuthenticated()">-->
+            <!--            <li method="POST" th:action="@{/logout}"> Welcome :</li>-->
+            <!--            <span-->
+            <!--                    sec:authentication="name">User with role:</span> <span-->
+            <!--                sec:authentication="principal.authorities">.</span>-->
+            <!--            </div>-->
+            <!--            </li>-->
+            <li style="font-weight: bold" sec:authorize="isAuthenticated()">
+                <span> Welcome :</span>
+                <span sec:authentication="name">User with role:</span>
+                <span sec:authentication="principal.authorities"></span>
             <li><a th:href="@{/recipe}">Recipe</a></li>
-            <li><a th:href="@{/ingredient/ingredients}">Ingredients</a></li>
-            <li><a th:href="@{/login}">Login</a></li>
-            <li><a th:href="@{/logout}">Logout</a></li>
+            </li>
+            <li style="padding: 10px 20px 40px 55px"><a th:href="@{/logout}">Logout</a></li>
         </ul>
     </nav>
 </header>

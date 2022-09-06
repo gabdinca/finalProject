@@ -3,6 +3,30 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td ul li {
+            text-align: left;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
     <meta charset="ISO-8859-1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -16,23 +40,13 @@
     <link rel="stylesheet" th:href="@{/nav_bar_2.css}">
     <title>Home</title>
 </head>
-<body>
-
+<body style="background-color: #ffffff">
 <header th:replace="fragments/nav_bar_2 :: navBar"/>
+<
 
 <div sec:authorize="isAuthenticated()">
-    <a sec:authorize="hasRole('ADMIN')" th:href="@{/addRecipe}" class="btn btn-primary">Add a new recipe</a>
-    <a th:href="@{/findAllRecipes}" class="btn btn-primary">All recipes</a>
-    <a th:href="@{/findRecipe}" class="btn btn-primary">Recipe search</a>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/add-recipe}" class="btn btn-primary">Add a new recipe</a>
 </div>
-
-<div sec:authorize="isAuthenticated()">
-    <form method="POST" th:action="@{/logout}">You are logged in as: <span
-            sec:authentication="name">User with role:</span> <span sec:authentication="principal.authorities">.</span>
-        <input type="submit" value="Logout" class="btn btn-danger"/>
-    </form>
-</div>
-
 <div><h3>Recipe Search by ingredients</h3></div>
 <form action="#" th:action="@{/recipe/search}" th:object="${searchForm}" method="POST">
     <div class="container">
@@ -48,39 +62,32 @@
     </div>
 </form>
 
+<h2>Search result with matching ingredients</h2>
+
 <table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Ingredients</th>
+    </tr>
     <tr th:each="searchResult : ${searchResult}">
-        <td><span th:text="${searchResult.title}">Title</span></td>
-        <td><span th:text="${searchResult.description}">Description</span></td>
-        <td><span th:text="${searchResult.preparationInstructions}">Preparation instruction</span></td>
-
-        <td>
-            <ul th:each="ingredient: ${searchResult.ingredients}">
-                <li th:text="${ingredient.name}"></li>
-
-            </ul>
-
-        </td>
-    </tr>
-
+        <td th:text="${searchResult.title}"></td>
+        <td th:text="${searchResult.description}"></td>
+        <td th:text="${ingredientsString}"></td>
 </table>
+
+<h2>Suggested recipes without one ingredient</h2>
 
 <table>
-    <tr th:each="searchResult : ${searchResultWithoutOneIngredient}">
-        <td><span th:text="${searchResult.title}">Title</span></td>
-        <td><span th:text="${searchResult.description}">Description</span></td>
-        <td><span th:text="${searchResult.preparationInstructions}">Preparation instruction</span></td>
-
-        <td>
-            <ul th:each="ingredient: ${searchResult.ingredients}">
-                <li th:text="${ingredient.name}"></li>
-
-            </ul>
-
-        </td>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Ingredients</th>
     </tr>
-
+    <tr th:each="searchResult : ${searchResultWithoutOneIngredient}">
+        <td th:text="${searchResult.title}"></td>
+        <td th:text="${searchResult.description}"></td>
+        <td th:text="${ingredientsString}"></td>
 </table>
-
 </body>
 </html>
