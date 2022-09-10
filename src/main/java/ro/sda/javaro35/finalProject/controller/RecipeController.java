@@ -39,10 +39,10 @@ public class RecipeController {
         model.addAttribute("ingredients", ingredientService.getAllIngredient());
         model.addAttribute("ingredientsString", ingredientService.ingredientsToString(ingredientDtoList));
 
-        List<RecipeDto> recipeWithoutOneIngredient = recipeService.getRecipeWithoutOneIngredient(ingredientDtoList);
-        model.addAttribute("searchResultWithoutOneIngredient", recipeWithoutOneIngredient);
-//       List<IngredientDto> ingredientListWithoutOneIngredient = ingredientService.getAllIngredient(recipeWithoutOneIngredient);
-        model.addAttribute("ingredientsToString",ingredientService.ingredientsToString(ingredientDtoList));
+        List<RecipeDto> searchResultWithoutOneIngredient = recipeService.getRecipeWithoutOneIngredient(ingredientDtoList);
+        model.addAttribute("searchResultWithoutOneIngredient", searchResultWithoutOneIngredient);
+        List<IngredientDto> ingredientListWithoutOneIngredient = recipeService.listWhithoutOneIngredient;
+        model.addAttribute("ingredientsToString",ingredientService.ingredientsToString(ingredientListWithoutOneIngredient));
         return "homepage";
     }
 

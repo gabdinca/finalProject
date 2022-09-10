@@ -1,7 +1,9 @@
 package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.sda.javaro35.finalProject.dto.IngredientDto;
@@ -17,6 +19,7 @@ import ro.sda.javaro35.finalProject.validators.RecipeValidator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static lombok.AccessLevel.PRIVATE;
@@ -33,7 +36,8 @@ public class RecipeService {
     IngredientMapper ingredientMapper;
     @Autowired
     RecipeMapper recipeMapper;
-
+    @NonFinal
+    public  List<IngredientDto> listWhithoutOneIngredient;
 
     public List<RecipeDto> findByIngredients(List<IngredientDto> ingredientDtoList) {
         List<Ingredient> ingredients = ingredientDtoList.stream()
@@ -92,11 +96,23 @@ public class RecipeService {
         List<Ingredient> ingredients = ingredientDtoList.stream()
                 .map(ingredientMapper::convertToEntity)
                 .collect(toList());
-        return recipeRepository.findRecipesByIngredientsIn(ingredients)
+
+        List<RecipeDto> recipeDtoList = recipeRepository.findRecipesByIngredientsIn(ingredients)
                 .stream()
                 .map(recipeMapper::convertToDto)
                 .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
                 .distinct()
                 .collect(toList());
+
+        listWhithoutOneIngredient = recipeRepository.findRecipesByIngredientsIn(ingredients)
+                .stream()
+                .map(recipeMapper::convertToDto)
+                .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
+                .distinct()
+                .flatMap(recipeDto -> recipeDto.getIngredients().stream())
+                .collect(toList());
+
+        return recipeDtoList;
+
     }
 }

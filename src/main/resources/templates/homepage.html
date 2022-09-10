@@ -87,7 +87,7 @@
     <tr th:each="searchResult : ${searchResultWithoutOneIngredient}">
         <td th:text="${searchResult.title}"></td>
         <td th:text="${searchResult.description}"></td>
-        <td th:text="${ingredientsString}"></td>
+        <td th:text="${ingredientsToString}"></td>
 </table>
 </body>
 </html>
