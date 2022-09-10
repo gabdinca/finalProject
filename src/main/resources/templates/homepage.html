@@ -42,7 +42,6 @@
 </head>
 <body style="background-color: #ffffff">
 <header th:replace="fragments/nav_bar_2 :: navBar"/>
-<
 
 <div sec:authorize="isAuthenticated()">
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/add-recipe}" class="btn btn-primary">Add a new recipe</a>
@@ -52,17 +51,20 @@
     <div class="container">
 
         <p><strong>Select Ingredients(Multiple):</strong>
-            <select id="multiple-hobbies" th:field="*{ingredientsListIds}" multiple="multiple">
+            <select th:field="*{ingredientsListIds}" multiple="multiple" required="required">
 
                 <option th:each="ingredient: ${ingredients}"
                         th:value="${ingredient.id}" th:text="${ingredient.name}">
             </select>
+            <input type="submit" value="Search"/>
         </p>
-        <input type="submit" value="submit"/>
     </div>
 </form>
 
-<h2>Search result with matching ingredients</h2>
+<br>
+<br>
+
+<h3>Search result with matching ingredients</h3>
 
 <table>
     <tr>
@@ -76,7 +78,10 @@
         <td th:text="${ingredientsString}"></td>
 </table>
 
-<h2>Suggested recipes without one ingredient</h2>
+<br>
+<br>
+
+<h3>Suggested recipes without one ingredient</h3>
 
 <table>
     <tr>
