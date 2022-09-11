@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="ISO-8859-1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+            integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+            integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/nav_bar_2.css}">
+    <title>New Recipe</title>
+</head>
+<body>
+<header th:replace="fragments/nav_bar_2 :: navBar"/>
+<br><br>
+<!--<h3 style="padding-left: 120px">Make your favorite recipe known</h3><br>-->
+<!--<form style="padding-left: 20px" th:action="@{/new-recipe}" th:object="${recipeDto}" method="POST">-->
+<!--    <label style="font-size: 30px" for="title">Title</label><br>-->
+<!--    <input id="title" size=100 th:value="${recipeDto.title}"><br>-->
+<!--    <label style="font-size: 30px" for="description">Description</label><br>-->
+<!--    <input id="description" size=100 th:value="${recipeDto.description}"><br>-->
+<!--    <label style="font-size: 30px" for="preparation_instructions">Preparation Instructions</label><br>-->
+<!--    <input id="preparation_instructions" size=100 th:value="${recipeDto.preparationInstructions}"><br>-->
+<!--&lt;!&ndash;    <label style="font-size: 30px" for="ingredients">Ingredients</label><br>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input id="ingredients" size=100 th:value="${recipeDto.ingredients}"><br><br><br>&ndash;&gt;-->
+<!--    <input style="background-color: #04AA6D;font-size:30px" type="submit" value="Add Recipe"/><br><br><br><br><br>-->
+<!--</form>-->
+<form style="padding-left:20px " th:action = "@{/ingredient}" method="POST">
+    <label style="font-size: 30px" for="new-ingredient">New Ingredient</label><br>
+    <input id ="new-ingredient" size = 50 th:value="${ingredientName}"><br>
+    <input style="background-color: #04AA6D;font-size:30px" type="submit" value="Add Ingredient"/>
+</form>
+</body>
+</html>

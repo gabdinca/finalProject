@@ -41,16 +41,7 @@ public class RecipeController {
 
         List<RecipeDto> searchResultWithoutOneIngredient = recipeService.getRecipeWithoutOneIngredient(ingredientDtoList);
         model.addAttribute("searchResultWithoutOneIngredient", searchResultWithoutOneIngredient);
-        List<IngredientDto> ingredientListWithoutOneIngredient = recipeService.listWhithoutOneIngredient;
-        model.addAttribute("ingredientsToString",ingredientService.ingredientsToString(ingredientListWithoutOneIngredient));
+        model.addAttribute("ingredientsToString", ingredientService.ingredientsToString(recipeService.listWithoutOneIngredient));
         return "homepage";
     }
-
-
-    @Transactional
-    @PostMapping
-    public String createRecipe(@RequestBody RecipeDto recipeDto) {
-        return recipeService.createRecipe(recipeDto);
-    }
-
 }

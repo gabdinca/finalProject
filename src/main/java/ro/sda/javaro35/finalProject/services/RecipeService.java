@@ -1,7 +1,6 @@
 package ro.sda.javaro35.finalProject.services;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import ro.sda.javaro35.finalProject.validators.RecipeValidator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static lombok.AccessLevel.PRIVATE;
@@ -37,7 +35,7 @@ public class RecipeService {
     @Autowired
     RecipeMapper recipeMapper;
     @NonFinal
-    public  List<IngredientDto> listWhithoutOneIngredient;
+    public List<IngredientDto> listWithoutOneIngredient;
 
     public List<RecipeDto> findByIngredients(List<IngredientDto> ingredientDtoList) {
         List<Ingredient> ingredients = ingredientDtoList.stream()
@@ -86,10 +84,8 @@ public class RecipeService {
     }
 
     public String createRecipe(RecipeDto recipeDto) {
-        List<IngredientDto> ingredients = recipeDto.getIngredients();
-        Recipe recipe = recipeMapper.convertToEntity(recipeDto);
-        recipeRepository.save(recipe);
-        return "recipe save";
+        recipeRepository.save(recipeMapper.convertToEntity(recipeDto));
+        return "new-recipe";
     }
 
     public List<RecipeDto> getRecipeWithoutOneIngredient(List<IngredientDto> ingredientDtoList) {
@@ -104,7 +100,7 @@ public class RecipeService {
                 .distinct()
                 .collect(toList());
 
-        listWhithoutOneIngredient = recipeRepository.findRecipesByIngredientsIn(ingredients)
+        listWithoutOneIngredient = recipeRepository.findRecipesByIngredientsIn(ingredients)
                 .stream()
                 .map(recipeMapper::convertToDto)
                 .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
