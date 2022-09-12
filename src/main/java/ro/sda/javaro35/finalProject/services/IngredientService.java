@@ -10,7 +10,6 @@ import ro.sda.javaro35.finalProject.mapper.IngredientMapper;
 import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 import ro.sda.javaro35.finalProject.validators.IngredientValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -42,17 +41,6 @@ public class IngredientService {
         return ingredientMapper.convertToDto(ingredient);
     }
 
-    public IngredientDto saveIngredient(final IngredientDto ingredientDto) {
-        Ingredient ingredient = ingredientMapper.convertToEntity(ingredientDto);
-        ingredient = ingredientRepository.save(ingredient);
-        return ingredientMapper.convertToDto(ingredient);
-    }
-
-    public void updateIngredient(final Ingredient ingredient, final long id) {
-        ingredientValidator.validateIngredientCanBeUpdateOrDeleted(id);
-        ingredientRepository.save(ingredient);
-    }
-
     public void deleteIngredient(final long id) {
         ingredientValidator.validateIngredientCanBeUpdateOrDeleted(id);
         ingredientRepository.deleteById(id);
@@ -65,5 +53,15 @@ public class IngredientService {
             stringBuilder.append(ingredientDto.getName()).append("  ");
         }
         return stringBuilder.toString();
+    }
+    public IngredientDto saveIngredient(final IngredientDto ingredientDto) {
+        Ingredient ingredient = ingredientMapper.convertToEntity(ingredientDto);
+        ingredient = ingredientRepository.save(ingredient);
+        return ingredientMapper.convertToDto(ingredient);
+    }
+
+    public void updateIngredient(final Ingredient ingredient, final long id) {
+        ingredientValidator.validateIngredientCanBeUpdateOrDeleted(id);
+        ingredientRepository.save(ingredient);
     }
 }

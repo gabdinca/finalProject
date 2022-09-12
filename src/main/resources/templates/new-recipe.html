@@ -19,21 +19,21 @@
 <body>
 <header th:replace="fragments/nav_bar_2 :: navBar"/>
 <br><br>
-<!--<h3 style="padding-left: 120px">Make your favorite recipe known</h3><br>-->
-<!--<form style="padding-left: 20px" th:action="@{/new-recipe}" th:object="${recipeDto}" method="POST">-->
-<!--    <label style="font-size: 30px" for="title">Title</label><br>-->
-<!--    <input id="title" size=100 th:value="${recipeDto.title}"><br>-->
-<!--    <label style="font-size: 30px" for="description">Description</label><br>-->
-<!--    <input id="description" size=100 th:value="${recipeDto.description}"><br>-->
-<!--    <label style="font-size: 30px" for="preparation_instructions">Preparation Instructions</label><br>-->
-<!--    <input id="preparation_instructions" size=100 th:value="${recipeDto.preparationInstructions}"><br>-->
-<!--&lt;!&ndash;    <label style="font-size: 30px" for="ingredients">Ingredients</label><br>&ndash;&gt;-->
-<!--&lt;!&ndash;    <input id="ingredients" size=100 th:value="${recipeDto.ingredients}"><br><br><br>&ndash;&gt;-->
-<!--    <input style="background-color: #04AA6D;font-size:30px" type="submit" value="Add Recipe"/><br><br><br><br><br>-->
-<!--</form>-->
+<h3 style="padding-left: 120px">Make your favorite recipe known</h3><br>
+<form style="padding-left: 20px" th:action="@{/new-recipe}" th:object="${recipeDto}" method="POST">
+    <label style="font-size: 30px" for="title">Title</label><br>
+    <input id="title" size=100 th:value="${recipeDto.title}"><br>
+    <label style="font-size: 30px" for="description">Description</label><br>
+    <input id="description" size=100 th:value="${recipeDto.description}"><br>
+    <label style="font-size: 30px" for="preparation_instructions">Preparation Instructions</label><br>
+    <input id="preparation_instructions" size=100 th:value="${recipeDto.preparationInstructions}"><br>
+    <label style="font-size: 30px" for="ingredients">Ingredients</label><br>
+    <input id="ingredients" size=100 th:value="${recipeDto.ingredients}"><br><br>
+    <input style="background-color: #04AA6D;font-size:30px" type="submit" value="Add Recipe"/><br><br><br><br><br>
+</form>
 <form style="padding-left:20px " th:action = "@{/ingredient}" method="POST">
     <label style="font-size: 30px" for="new-ingredient">New Ingredient</label><br>
-    <input id ="new-ingredient" size = 50 th:value="${ingredientName}"><br>
+    <input type="text" id ="new-ingredient" size = 50 th:value="${ingredientName}" name="ingredientName"><br><br>
     <input style="background-color: #04AA6D;font-size:30px" type="submit" value="Add Ingredient"/>
 </form>
 </body>

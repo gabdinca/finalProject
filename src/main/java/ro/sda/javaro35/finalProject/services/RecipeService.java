@@ -55,6 +55,35 @@ public class RecipeService {
         return finalList;
     }
 
+    public List<RecipeDto> getRecipeWithoutOneIngredient(List<IngredientDto> ingredientDtoList) {
+        List<Ingredient> ingredients = ingredientDtoList.stream()
+                .map(ingredientMapper::convertToEntity)
+                .collect(toList());
+
+        List<RecipeDto> recipeDtoList = recipeRepository.findRecipesByIngredientsIn(ingredients)
+                .stream()
+                .map(recipeMapper::convertToDto)
+                .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
+                .distinct()
+                .collect(toList());
+
+        listWithoutOneIngredient = recipeRepository.findRecipesByIngredientsIn(ingredients)
+                .stream()
+                .map(recipeMapper::convertToDto)
+                .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
+                .distinct()
+                .flatMap(recipeDto -> recipeDto.getIngredients().stream())
+                .collect(toList());
+
+        return recipeDtoList;
+    }
+
+    public String createRecipe(RecipeDto recipeDto) {
+        recipeRepository.save(recipeMapper.convertToEntity(recipeDto));
+        return "new-recipe";
+    }
+
+
     public List<RecipeDto> getAllRecipe() {
         return recipeRepository.findAll().stream()
                 .map(recipeMapper::convertToDto)
@@ -81,34 +110,5 @@ public class RecipeService {
     public void deleteRecipe(final long id) {
         recipeValidator.validateRecipeCanBeUpdateOrDeleted(id);
         recipeRepository.deleteById(id);
-    }
-
-    public String createRecipe(RecipeDto recipeDto) {
-        recipeRepository.save(recipeMapper.convertToEntity(recipeDto));
-        return "new-recipe";
-    }
-
-    public List<RecipeDto> getRecipeWithoutOneIngredient(List<IngredientDto> ingredientDtoList) {
-        List<Ingredient> ingredients = ingredientDtoList.stream()
-                .map(ingredientMapper::convertToEntity)
-                .collect(toList());
-
-        List<RecipeDto> recipeDtoList = recipeRepository.findRecipesByIngredientsIn(ingredients)
-                .stream()
-                .map(recipeMapper::convertToDto)
-                .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
-                .distinct()
-                .collect(toList());
-
-        listWithoutOneIngredient = recipeRepository.findRecipesByIngredientsIn(ingredients)
-                .stream()
-                .map(recipeMapper::convertToDto)
-                .filter(i -> i.getIngredients().size() == (ingredientDtoList.size() - 1))
-                .distinct()
-                .flatMap(recipeDto -> recipeDto.getIngredients().stream())
-                .collect(toList());
-
-        return recipeDtoList;
-
     }
 }

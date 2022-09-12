@@ -20,13 +20,13 @@ values (2, 35, 'gabi@gmail.com', true, 'dinca', 'gabriel', true,
 insert into user
 values (3, 22, 'user@user.com', true, 'user', 'user', true, 'password', 'USER');
 
-insert into recipe
-values (1, 'description1', 'preparation instruction 1', 'APPROVED', 'title1');
-insert into recipe
-values (2, 'description2', 'preparation instruction 2', 'APPROVED', 'title2');
-insert into recipe
-values (3, 'description3', 'preparation instruction 3', 'APPROVED', 'title3');
-insert into recipe
-values (4, 'description4', 'preparation instruction 4', 'APPROVED', 'title4');
-insert into recipe
-values (5, 'description5', 'preparation instruction 5', 'APPROVED', 'title5');
+-- insert into recipe
+-- values (1, 'description1', 'preparation instruction 1', 'APPROVED', 'title1');
+-- insert into recipe
+-- values (2, 'description2', 'preparation instruction 2', 'APPROVED', 'title2');
+-- insert into recipe
+-- values (3, 'description3', 'preparation instruction 3', 'APPROVED', 'title3');
+-- insert into recipe
+-- values (4, 'description4', 'preparation instruction 4', 'APPROVED', 'title4');
+-- insert into recipe
+-- values (5, 'description5', 'preparation instruction 5', 'APPROVED', 'title5');

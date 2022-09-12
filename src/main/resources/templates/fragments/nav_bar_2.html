@@ -14,14 +14,6 @@
     <h1><a th:href="@{/}">RECIPES</span></a></h1>
     <nav>
         <ul>
-            <!--            <li>-->
-            <!--                <div sec:authorize="isAuthenticated()">-->
-            <!--            <li method="POST" th:action="@{/logout}"> Welcome :</li>-->
-            <!--            <span-->
-            <!--                    sec:authentication="name">User with role:</span> <span-->
-            <!--                sec:authentication="principal.authorities">.</span>-->
-            <!--            </div>-->
-            <!--            </li>-->
             <li style="font-weight: bold" sec:authorize="isAuthenticated()">
                 <span> Welcome :</span>
                 <span sec:authentication="name">User with role:</span>

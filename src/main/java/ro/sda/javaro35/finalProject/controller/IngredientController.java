@@ -48,8 +48,7 @@ public class IngredientController {
 
     @PostMapping
     @Transactional
-    public String addIngredient(Model model) {
-        String ingredientName = "";
+    public String addIngredient(Model model, @RequestParam String ingredientName) {
         model.addAttribute("ingredientName", ingredientName);
         Ingredient ingredient = new Ingredient();
         ingredient.setName(ingredientName);
@@ -60,6 +59,6 @@ public class IngredientController {
             ingredientRepository.save(ingredient);
             //TODO - Sent messages
         }
-        return "new-recipe";
+        return "redirect:/new-recipe";
     }
 }

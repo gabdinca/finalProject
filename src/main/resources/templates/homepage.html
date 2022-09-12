@@ -46,7 +46,7 @@
 <div sec:authorize="isAuthenticated()">
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/add-recipe}" class="btn btn-primary">Add a new recipe</a>
 </div>
-<div><h3>Recipe Search by ingredients</h3></div>
+<div><h3 style="padding-left: 20px">Recipe Search by ingredients</h3></div>
 <form action="#" th:action="@{/recipe/search}" th:object="${searchForm}" method="POST">
     <div class="container">
 
@@ -64,7 +64,7 @@
 <br>
 <br>
 
-<h3>Search result with matching ingredients</h3>
+<h3 style="padding-left: 20px">Search result with matching ingredients</h3>
 
 <table>
     <tr>
@@ -81,7 +81,7 @@
 <br>
 <br>
 
-<h3>Suggested recipes without one ingredient</h3>
+<h3 style="padding-left: 20px">Suggested recipes without one ingredient</h3>
 
 <table>
     <tr>

@@ -11,7 +11,6 @@ import ro.sda.javaro35.finalProject.repository.IngredientRepository;
 @Slf4j
 public class IngredientValidator {
     private final IngredientRepository ingredientRepository;
-
     public void validateIngredientCanBeUpdateOrDeleted(final long id) {
         if (!ingredientRepository.existsById(id)) {
             log.warn("{} does not exist in the database", id);
