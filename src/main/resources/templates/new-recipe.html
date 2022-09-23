@@ -31,7 +31,6 @@
     <input id="ingredients" size=100 th:value="${recipeDto.ingredients}"><br><br>
     <input style="background-color: #04AA6D;font-size:30px" type="submit" value="Add Recipe"/><br><br><br><br><br>
 </form>
-
 <form style="padding-left:20px " th:action = "@{/ingredient}" method="POST">
     <label style="font-size: 30px" for="new-ingredient">New Ingredient</label><br>
     <input type="text" id ="new-ingredient" size = 50 th:value="${ingredientName}" name="ingredientName"><br><br>
